@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CinePredict | Box Office Prediction</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="form-box">
+
+            <h1>CinePredict</h1>
+
+            <p class="subtitle">
+                Predict Movie Box Office Collection using Machine Learning
+            </p>
+
+            <form  id="predictionForm" action="/predict" method="POST">
+            
+                <div class="input-grid">
+
+                    <!-- Movie Name -->
+
+                    <div class="input-box">
+                        <label>Movie Name</label>
+                        <input type="text"
+                            name="name"
+                            placeholder="Enter movie name"
+                            required>
+                    </div>
+
+                    <!-- Rating -->
+
+                    <div class="input-box">
+                        <label>Rating</label>
+
+                        <select name="rating" required>
+
+                            <option value="">Select Rating</option>
+                            <option value="G">G</option>
+                            <option value="PG">PG</option>
+                            <option value="PG-13">PG-13</option>
+                            <option value="R">R</option>
+                            <option value="NC-17">NC-17</option>
+                            <option value="Approved">Approved</option>
+                            <option value="Passed">Passed</option>
+                            <option value="TV-MA">TV-MA</option>
+
+                        </select>
+                    </div>
+
+                    <!-- Genre -->
+
+                    <div class="input-box">
+
+                        <label>Genre</label>
+
+                        <select name="genre" required>
+
+                            <option value="">Select Genre</option>
+
+                            <option>Action</option>
+                            <option>Adventure</option>
+                            <option>Animation</option>
+                            <option>Biography</option>
+                            <option>Comedy</option>
+                            <option>Crime</option>
+                            <option>Drama</option>
+                            <option>Family</option>
+                            <option>Fantasy</option>
+                            <option>History</option>
+                            <option>Horror</option>
+                            <option>Music</option>
+                            <option>Musical</option>
+                            <option>Mystery</option>
+                            <option>Romance</option>
+                            <option>Sci-Fi</option>
+                            <option>Sport</option>
+                            <option>Thriller</option>
+                            <option>War</option>
+                            <option>Western</option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- Year -->
+
+                    <div class="input-box">
+
+                        <label>Release Year</label>
+
+                        <input
+                            type="number"
+                            name="year"
+                            min="1900"
+                            max="2100"
+                            placeholder="2026"
+                            required>
+
+                    </div>
+                                 <!-- Released Date -->
+
+                    <div class="input-box">
+                        <label>Release Date</label>
+
+                        <input
+                            type="date"
+                            name="released"
+                            required>
+                    </div>
+
+                    <!-- IMDb Score -->
+
+                    <div class="input-box">
+                        <label>IMDb Score</label>
+
+                        <input
+                            type="number"
+                            name="score"
+                            step="0.1"
+                            min="0"
+                            max="10"
+                            placeholder="7.8"
+                            required>
+                    </div>
+
+                    <!-- Votes -->
+
+                    <div class="input-box">
+                        <label>IMDb Votes</label>
+
+                        <input
+                            type="number"
+                            name="votes"
+                            min="0"
+                            placeholder="250000"
+                            required>
+                    </div>
+
+                    <!-- Director -->
+
+                    <div class="input-box">
+                        <label>Director</label>
+
+                        <input
+                            type="text"
+                            name="director"
+                            placeholder="Christopher Nolan"
+                            required>
+                    </div>
+
+                    <!-- Writer -->
+
+                    <div class="input-box">
+                        <label>Writer</label>
+
+                        <input
+                            type="text"
+                            name="writer"
+                            placeholder="Jonathan Nolan"
+                            required>
+                    </div>
+
+                    <!-- Lead Star -->
+
+                    <div class="input-box">
+                        <label>Lead Star</label>
+
+                        <input
+                            type="text"
+                            name="star"
+                            placeholder="Leonardo DiCaprio"
+                            required>
+                    </div>
+
+                    <!-- Country -->
+
+                    <div class="input-box">
+                        <label>Country</label>
+
+                        <select name="country" required>
+
+                            <option value="">Select Country</option>
+
+                            <option>USA</option>
+                            <option>UK</option>
+                            <option>India</option>
+                            <option>Canada</option>
+                            <option>France</option>
+                            <option>Germany</option>
+                            <option>Australia</option>
+                            <option>Japan</option>
+                            <option>South Korea</option>
+                            <option>China</option>
+
+                        </select>
+                    </div>
+                                         <!-- Budget -->
+
+                    <div class="input-box">
+                        <label>Budget (USD)</label>
+
+                        <input
+                            type="number"
+                            name="budget"
+                            min="0"
+                            step="1000"
+                            placeholder="160000000"
+                            required>
+                    </div>
+
+                    <!-- Production Company -->
+
+                    <div class="input-box">
+                        <label>Production Company</label>
+
+                        <input
+                            type="text"
+                            name="company"
+                            placeholder="Warner Bros."
+                            required>
+                    </div>
+
+                    <!-- Runtime -->
+
+                    <div class="input-box">
+                        <label>Runtime (Minutes)</label>
+
+                        <input
+                            type="number"
+                            name="runtime"
+                            min="1"
+                            placeholder="148"
+                            required>
+                    </div>
+
+                </div>
+
+                <!-- Predict Button -->
+
+                <button type="submit" class="predict-btn">
+                    Predict Box Office
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>      

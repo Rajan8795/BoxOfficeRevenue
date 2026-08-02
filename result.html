@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CinePredict | Prediction Result</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <div class="logo">
+
+            🎬 CinePredict
+
+        </div>
+
+    </nav>
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+        <!-- ================= MOVIE DETAILS ================= -->
+
+        <div class="card fade">
+
+            <h1>Prediction Result</h1>
+
+            <p class="subtitle">
+
+                Predicted Box Office Revenue
+
+            </p>
+
+            <div class="result-grid">
+
+                <div class="result-box">
+                    <h3>🎬 Movie</h3>
+                    <h2 id="movieName">Interstellar</h2>
+                </div>
+
+                <div class="result-box">
+                    <h3>🎭 Genre</h3>
+                    <h2 id="movieGenre">Adventure</h2>
+                </div>
+
+                <div class="result-box">
+                    <h3>⭐ Rating</h3>
+                    <h2 id="movieRating">PG-13</h2>
+                </div>
+
+                <div class="result-box">
+                    <h3>📅 Year</h3>
+                    <h2 id="movieYear">2014</h2>
+                </div>
+
+                <div class="result-box">
+                    <h3>📆 Released</h3>
+                    <h2 id="movieReleased">2014-11-07</h2>
+                </div>
+
+                <div class="result-box">
+                    <h3>⭐ IMDb Score</h3>
+                    <h2 id="movieScore">8.7</h2>
+                </div>
+
+                <div class="result-box">
+                    <h3>🗳 Votes</h3>
+                    <h2 id="movieVotes">1,900,000</h2>
+                </div>
+
+                <div class="result-box">
+                    <h3>🌍 Country</h3>
+                    <h2 id="movieCountry">USA</h2>
+                </div>
+
+                <div class="result-box">
+                    <h3>🎬 Director</h3>
+                    <h2 id="movieDirector">Christopher Nolan</h2>
+                </div>
+
+                <div class="result-box">
+                    <h3>✍ Writer</h3>
+                    <h2 id="movieWriter">Jonathan Nolan</h2>
+                </div>
+
+                <div class="result-box">
+                    <h3>🌟 Lead Star</h3>
+                    <h2 id="movieStar">Matthew McConaughey</h2>
+                </div>
+
+                <div class="result-box">
+                    <h3>🏢 Company</h3>
+                    <h2 id="movieCompany">Paramount Pictures</h2>
+                </div>
+
+                <div class="result-box">
+                    <h3>⏱ Runtime</h3>
+                    <h2 id="movieRuntime">169 Min</h2>
+                </div>
+
+            </div>
+
+        </div>
+                <!-- ================= PREDICTION SUMMARY ================= -->
+
+        <div class="card fade">
+
+            <h2 class="text-center">
+
+                Prediction Summary
+
+            </h2>
+
+            <div class="result-grid">
+
+                <div class="result-box">
+
+                    <h3>💰 Predicted Revenue</h3>
+
+                    <h2 id="revenue">
+
+                        $987 Million
+
+                    </h2>
+
+                </div>
+
+                <div class="result-box">
+
+                    <h3>💵 Budget</h3>
+
+                    <h2 id="budgetResult">
+
+                        $185 Million
+
+                    </h2>
+
+                </div>
+
+                <div class="result-box">
+
+                    <h3>📈 Estimated Profit</h3>
+
+                    <h2 id="profit">
+
+                        $802 Million
+
+                    </h2>
+
+                </div>
+
+                <div class="result-box">
+
+                    <h3>📊 ROI</h3>
+
+                    <h2 id="roi">
+
+                        433%
+
+                    </h2>
+
+                </div>
+
+                <div class="result-box">
+
+                    <h3>🏆 Performance</h3>
+
+                    <h2 id="category">
+
+                        Blockbuster
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= ANALYTICS ================= -->
+
+        <div class="card fade">
+
+            <h2>
+
+                Revenue Analytics
+
+            </h2>
+
+            <canvas id="revenueChart"></canvas>
+
+        </div>
+
+        <div class="card fade">
+
+            <h2>
+
+                Budget vs Revenue
+
+            </h2>
+
+            <canvas id="budgetChart"></canvas>
+
+        </div>
+                <!-- ================= RECENT PREDICTION ================= -->
+
+        <div class="card fade">
+
+            <h2 class="text-center">
+
+                Recent Prediction
+
+            </h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Movie</th>
+                        <th>Revenue</th>
+                        <th>ROI</th>
+                        <th>Performance</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td id="historyMovie">
+
+                            Interstellar
+
+                        </td>
+
+                        <td id="historyRevenue">
+
+                            $987 Million
+
+                        </td>
+
+                        <td id="historyROI">
+
+                            433%
+
+                        </td>
+
+                        <td id="historyCategory">
+
+                            🏆 Blockbuster
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <!-- ================= ACTION BUTTONS ================= -->
+
+        <div class="buttons">
+
+            <button id="backButton">
+
+                ← Predict Another Movie
+
+            </button>
+
+            <button id="downloadPDF">
+
+                📄 Download Report
+
+            </button>
+
+        </div>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+
+            🎬 CinePredict | Movie Box Office Revenue Prediction using Machine Learning
+
+        </p>
+
+        <p>
+
+            Designed by Rajan Prajapati
+
+        </p>
+
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
