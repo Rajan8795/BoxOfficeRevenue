@@ -68,17 +68,19 @@ MODEL_PATH = os.path.join(
     "model.joblib"
 )
 
-if not os.path.exists(MODEL_PATH):
+MODEL_PATH = os.path.join(BASE_DIR, "model.joblib")
 
-    raise FileNotFoundError(
-        "model.joblib not found. "
-        "Run: python model.py"
+try:
+    model_package = joblib.load(MODEL_PATH)
+
+    model = model_package["model"]
+    FEATURES = model_package["features"]
+
+except Exception as error:
+    app.logger.exception("Model loading failed")
+    raise RuntimeError(
+        f"Could not load model.joblib: {error}"
     )
-
-
-model_package = joblib.load(
-    MODEL_PATH
-)
 
 model = model_package["model"]
 
