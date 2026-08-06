@@ -29,16 +29,16 @@ app = Flask(__name__)
 
 app.config.update(
 
-    SECRET_KEY=os.environ.get(
-        "FLASK_SECRET_KEY",
-        secrets.token_hex(32)
-    ),
+   SECRET_KEY=os.environ.get(
+    "FLASK_SECRET_KEY",
+    "development-secret-key"
+),
 
     SESSION_COOKIE_HTTPONLY=True,
 
     SESSION_COOKIE_SAMESITE="Lax",
 
-    SESSION_COOKIE_SECURE=False,
+    SESSION_COOKIE_SECURE=True,
 
     MAX_CONTENT_LENGTH=16 * 1024
 )
