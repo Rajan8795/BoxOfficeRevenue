@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        CinePredict | Prediction Result
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js"
+        defer
+    ></script>
+
+</head>
+
+
+<body>
+
+<div class="ambient ambient-one"></div>
+<div class="ambient ambient-two"></div>
+<div class="ambient ambient-three"></div>
+
+
+<nav class="navbar">
+
+    <div class="brand">
+
+        <span class="brand-icon">◆</span>
+
+        CinePredict
+
+    </div>
+
+    <span class="nav-label">
+        PREDICTION REPORT
+    </span>
+
+</nav>
+
+
+<main class="page-shell result-page">
+
+
+    <section class="result-hero">
+
+        <div class="hero-badge">
+
+            <span></span>
+
+            MODEL PREDICTION COMPLETE
+
+        </div>
+
+        <h1>
+            Box Office <em>Forecast.</em>
+        </h1>
+
+        <p>
+            Machine-learning estimate based on the
+            submitted movie parameters.
+        </p>
+
+    </section>
+
+
+    <!-- Revenue -->
+
+    <section class="glass-card revenue-card">
+
+        <div>
+
+            <span class="eyebrow">
+                ESTIMATED GROSS REVENUE
+            </span>
+
+            <div
+                class="big-money"
+                id="revenue"
+            >
+                $0
+            </div>
+
+            <div
+                class="performance-pill"
+                id="category"
+            >
+                —
+            </div>
+
+        </div>
+
+
+        <div class="revenue-side">
+
+            <span>
+                ROI
+            </span>
+
+            <strong id="roi">
+                0%
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <!-- Movie Details -->
+
+    <section class="glass-card">
+
+        <div class="card-heading">
+
+            <div>
+
+                <span class="eyebrow">
+                    MODEL INPUTS
+                </span>
+
+                <h2>
+                    Movie Profile
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="result-grid">
+
+
+            <div class="result-box">
+
+                <span>Rating</span>
+
+                <strong id="movieRating">—</strong>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <span>Genre</span>
+
+                <strong id="movieGenre">—</strong>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <span>Release Year</span>
+
+                <strong id="movieYear">—</strong>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <span>IMDb Score</span>
+
+                <strong id="movieScore">—</strong>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <span>IMDb Votes</span>
+
+                <strong id="movieVotes">—</strong>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <span>Budget</span>
+
+                <strong id="budgetResult">—</strong>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <span>Director</span>
+
+                <strong id="movieDirector">—</strong>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <span>Writer</span>
+
+                <strong id="movieWriter">—</strong>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <span>Lead Star</span>
+
+                <strong id="movieStar">—</strong>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <span>Country</span>
+
+                <strong id="movieCountry">—</strong>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <span>Production Company</span>
+
+                <strong id="movieCompany">—</strong>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <span>Runtime</span>
+
+                <strong id="movieRuntime">—</strong>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- Financial Summary -->
+
+    <section class="glass-card">
+
+        <div class="card-heading">
+
+            <div>
+
+                <span class="eyebrow">
+                    FINANCIAL ANALYSIS
+                </span>
+
+                <h2>
+                    Prediction Summary
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="result-grid summary-grid">
+
+
+            <div class="result-box">
+
+                <span>Predicted Revenue</span>
+
+                <strong id="summaryRevenue">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <span>Budget</span>
+
+                <strong id="summaryBudget">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <span>Estimated Profit</span>
+
+                <strong id="profit">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <span>ROI</span>
+
+                <strong id="summaryROI">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <span>Performance</span>
+
+                <strong id="summaryCategory">
+                    —
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Charts -->
+
+   <!-- ================= ANALYTICS ================= -->
+
+<div class="card analytics-card fade" id="revenueAnalyticsCard">
+
+    <div class="section-heading">
+        <span class="section-icon">📊</span>
+        <div>
+            <h2>Revenue Analytics</h2>
+            <p>Budget, predicted revenue and estimated profit</p>
+        </div>
+    </div>
+
+    <div class="chart-wrapper">
+        <canvas id="revenueChart"></canvas>
+    </div>
+
+</div>
+
+
+<div class="card analytics-card fade" id="budgetAnalyticsCard">
+
+    <div class="section-heading">
+        <span class="section-icon">💰</span>
+        <div>
+            <h2>Budget vs Revenue</h2>
+            <p>Comparison of production budget and predicted revenue</p>
+        </div>
+    </div>
+
+    <div class="chart-wrapper doughnut-wrapper">
+        <canvas id="budgetChart"></canvas>
+    </div>
+
+</div>
+    <!-- Actions -->
+
+    <div class="buttons">
+
+        <a
+            href="{{ url_for('index') }}"
+            class="action-button"
+        >
+            ← Predict Another Movie
+        </a>
+
+        <button
+            type="button"
+            class="action-button"
+            id="downloadPDF"
+        >
+            Print / Save Report
+        </button>
+
+    </div>
+
+
+</main>
+
+
+<footer>
+
+    <span>CinePredict</span>
+
+    <span>
+        ML Movie Revenue Prediction
+    </span>
+
+    <span>
+        Designed by Rajan Prajapati
+    </span>
+
+</footer>
+
+
+<script
+    type="application/json"
+    id="prediction-data"
+>{{ prediction|tojson }}</script>
+
+
+<script
+    src="{{ url_for('static', filename='script.js') }}"
+></script>
+
+</body>
+<script src="script.js"></script>
+</body>
+</html>
+
+</html>

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="CinePredict movie box office revenue prediction using machine learning."
+    >
+
+    <title>CinePredict | ML Box Office Prediction</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+</head>
+
+<body>
+
+<div class="ambient ambient-one"></div>
+<div class="ambient ambient-two"></div>
+<div class="ambient ambient-three"></div>
+
+
+<nav class="navbar">
+
+    <div class="brand">
+
+        <span class="brand-icon">◆</span>
+
+        <span>CinePredict</span>
+
+    </div>
+
+    <span class="nav-label">
+        MACHINE LEARNING
+    </span>
+
+</nav>
+
+
+<main class="page-shell">
+
+
+    <section class="hero">
+
+        <div class="hero-badge">
+
+            <span></span>
+
+            AI BOX OFFICE ANALYTICS
+
+        </div>
+
+        <h1>
+
+            Predict the
+            <em>Box Office.</em>
+
+        </h1>
+
+        <p>
+
+            Estimate movie revenue using historical
+            movie-industry data and machine learning.
+
+        </p>
+
+    </section>
+
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages %}
+
+            {% for category, message in messages %}
+
+                <div class="alert">
+
+                    {{ message }}
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+
+    <section class="glass-card form-card">
+
+        <div class="card-heading">
+
+            <div>
+
+                <span class="eyebrow">
+                    MOVIE PARAMETERS
+                </span>
+
+                <h2>
+                    Enter Movie Details
+                </h2>
+
+            </div>
+
+            <div class="step-badge">
+                01 / 01
+            </div>
+
+        </div>
+
+
+        <form
+            id="predictionForm"
+            action="{{ url_for('predict') }}"
+            method="POST"
+            novalidate
+        >
+
+            <input
+                type="hidden"
+                name="csrf_token"
+                value="{{ csrf_token }}"
+            >
+
+
+            <div class="input-grid">
+
+
+                <!-- Rating -->
+
+                <div class="input-box">
+
+                    <label for="rating">
+                        Rating
+                    </label>
+
+                    <select
+                        id="rating"
+                        name="rating"
+                        required
+                    >
+
+                        <option value="">
+                            Select Rating
+                        </option>
+
+                        <option>G</option>
+                        <option>PG</option>
+                        <option>PG-13</option>
+                        <option>R</option>
+                        <option>NC-17</option>
+                        <option>Approved</option>
+                        <option>Passed</option>
+                        <option>TV-MA</option>
+
+                    </select>
+
+                    <small>
+                        Movie content rating
+                    </small>
+
+                </div>
+
+
+                <!-- Genre -->
+
+                <div class="input-box">
+
+                    <label for="genre">
+                        Genre
+                    </label>
+
+                    <select
+                        id="genre"
+                        name="genre"
+                        required
+                    >
+
+                        <option value="">
+                            Select Genre
+                        </option>
+
+                        <option>Action</option>
+                        <option>Adventure</option>
+                        <option>Animation</option>
+                        <option>Biography</option>
+                        <option>Comedy</option>
+                        <option>Crime</option>
+                        <option>Drama</option>
+                        <option>Family</option>
+                        <option>Fantasy</option>
+                        <option>History</option>
+                        <option>Horror</option>
+                        <option>Music</option>
+                        <option>Musical</option>
+                        <option>Mystery</option>
+                        <option>Romance</option>
+                        <option>Sci-Fi</option>
+                        <option>Sport</option>
+                        <option>Thriller</option>
+                        <option>War</option>
+                        <option>Western</option>
+
+                    </select>
+
+                    <small>
+                        Primary movie genre
+                    </small>
+
+                </div>
+
+
+                <!-- Year -->
+
+                <div class="input-box">
+
+                    <label for="year">
+                        Release Year
+                    </label>
+
+                    <input
+                        id="year"
+                        type="number"
+                        name="year"
+                        min="1900"
+                        max="2100"
+                        placeholder="2026"
+                        required
+                    >
+
+                    <small>
+                        Year of theatrical release
+                    </small>
+
+                </div>
+
+
+                <!-- Score -->
+
+                <div class="input-box">
+
+                    <label for="score">
+                        IMDb Score
+                    </label>
+
+                    <input
+                        id="score"
+                        type="number"
+                        name="score"
+                        min="0"
+                        max="10"
+                        step="0.1"
+                        placeholder="7.8"
+                        required
+                    >
+
+                    <small>
+                        IMDb rating from 0 to 10
+                    </small>
+
+                </div>
+
+
+                <!-- Votes -->
+
+                <div class="input-box">
+
+                    <label for="votes">
+                        IMDb Votes
+                    </label>
+
+                    <input
+                        id="votes"
+                        type="number"
+                        name="votes"
+                        min="0"
+                        max="1000000000"
+                        placeholder="250000"
+                        required
+                    >
+
+                    <small>
+                        Number of IMDb votes
+                    </small>
+
+                </div>
+
+
+                <!-- Budget -->
+
+                <div class="input-box">
+
+                    <label for="budget">
+                        Budget (USD)
+                    </label>
+
+                    <input
+                        id="budget"
+                        type="number"
+                        name="budget"
+                        min="0"
+                        max="10000000000"
+                        step="1000"
+                        placeholder="160000000"
+                        required
+                    >
+
+                    <small>
+                        Estimated production budget
+                    </small>
+
+                </div>
+
+
+                <!-- Director -->
+
+                <div class="input-box">
+
+                    <label for="director">
+                        Director
+                    </label>
+
+                    <input
+                        id="director"
+                        type="text"
+                        name="director"
+                        maxlength="100"
+                        placeholder="Christopher Nolan"
+                        required
+                    >
+
+                    <small>
+                        Movie director
+                    </small>
+
+                </div>
+
+
+                <!-- Writer -->
+
+                <div class="input-box">
+
+                    <label for="writer">
+                        Writer
+                    </label>
+
+                    <input
+                        id="writer"
+                        type="text"
+                        name="writer"
+                        maxlength="100"
+                        placeholder="Jonathan Nolan"
+                        required
+                    >
+
+                    <small>
+                        Main writer
+                    </small>
+
+                </div>
+
+
+                <!-- Lead Star -->
+
+                <div class="input-box">
+
+                    <label for="star">
+                        Lead Star
+                    </label>
+
+                    <input
+                        id="star"
+                        type="text"
+                        name="star"
+                        maxlength="100"
+                        placeholder="Leonardo DiCaprio"
+                        required
+                    >
+
+                    <small>
+                        Principal actor
+                    </small>
+
+                </div>
+
+
+                <!-- Country -->
+
+                <div class="input-box">
+
+                    <label for="country">
+                        Country
+                    </label>
+
+                    <select
+                        id="country"
+                        name="country"
+                        required
+                    >
+
+                        <option value="">
+                            Select Country
+                        </option>
+
+                        <option>USA</option>
+                        <option>UK</option>
+                        <option>India</option>
+                        <option>Canada</option>
+                        <option>France</option>
+                        <option>Germany</option>
+                        <option>Australia</option>
+                        <option>Japan</option>
+                        <option>South Korea</option>
+                        <option>China</option>
+
+                    </select>
+
+                    <small>
+                        Primary production country
+                    </small>
+
+                </div>
+
+
+                <!-- Company -->
+
+                <div class="input-box">
+
+                    <label for="company">
+                        Production Company
+                    </label>
+
+                    <input
+                        id="company"
+                        type="text"
+                        name="company"
+                        maxlength="150"
+                        placeholder="Warner Bros."
+                        required
+                    >
+
+                    <small>
+                        Production studio
+                    </small>
+
+                </div>
+
+
+                <!-- Runtime -->
+
+                <div class="input-box">
+
+                    <label for="runtime">
+                        Runtime (Minutes)
+                    </label>
+
+                    <input
+                        id="runtime"
+                        type="number"
+                        name="runtime"
+                        min="1"
+                        max="1000"
+                        placeholder="148"
+                        required
+                    >
+
+                    <small>
+                        Total movie duration
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="form-footer">
+
+                <div class="model-status">
+
+                    <span class="status-dot"></span>
+
+                    Random Forest / Extra Trees ML
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="predict-btn"
+                    id="predictButton"
+                >
+
+                    <span>
+                        Predict Box Office
+                    </span>
+
+                    <strong>→</strong>
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+
+    <section class="info-strip">
+
+        <div>
+
+            <strong>12</strong>
+
+            <span>Input Features</span>
+
+        </div>
+
+        <div>
+
+            <strong>ML</strong>
+
+            <span>Regression Model</span>
+
+        </div>
+
+        <div>
+
+            <strong>USD</strong>
+
+            <span>Revenue Output</span>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<footer>
+
+    <span>CinePredict</span>
+
+    <span>Movie Revenue Intelligence</span>
+
+    <span>Designed by Rajan Prajapati</span>
+
+</footer>
+
+
+<script
+    src="{{ url_for('static', filename='script.js') }}"
+></script>
+
+</body>
+
+</html>
